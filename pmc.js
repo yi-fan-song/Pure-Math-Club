@@ -1,25 +1,40 @@
 // This file will have mostly listeners in it.
-const initialSettings = require("./settings.json");
-const Discord = require('discord.js');
-const fs = require('fs');
-var settings = initialSettings;
+// import * as initialSettings from "./settings.json";
+// const initialSettings = require("./settings.json");
+import * as Discord from "discord.js";
+// const Discord = require('discord.js');
+import fs from "fs";
+// const fs = require('fs');
+// var settings = initialSettings;
 
-const CONSTANTS = require("./utils/constants.mjs")
-const fssettings = require("./utils/fssettings.mjs")
+import * as CONSTANTS from './utils/constants.mjs';
+import * as fssettings from './utils/fssettings.mjs';
+// const CONSTANTS = require("./utils/constants.mjs")
+// const fssettings = require("./utils/fssettings.mjs")
 
-const basics = require("./functions/basics.mjs")
-const roles = require("./functions/roles.mjs")
+import * as basics from "./functions/basics.mjs";
+import * as roles from "./functions/roles.mjs";
+// const basics = require("./functions/basics.mjs")
+// const roles = require("./functions/roles.mjs")
+
+const settings = fssettings.readFromSettings();
 
 // Make sure the intents are working!
 const bot = new Discord.Client({
-    intents: [Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_PRESENCES, Discord.Intents.FLAGS.GUILD_MESSAGES, 
-                  Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
-    partials: ['MESSAGE','CHANNEL','REACTION', 'GUILD_MEMBER','USER']
-})
+  intents: [
+    Discord.Intents.FLAGS.GUILD_MEMBERS,
+    Discord.Intents.FLAGS.GUILDS,
+    Discord.Intents.FLAGS.GUILD_PRESENCES,
+    Discord.Intents.FLAGS.GUILD_MESSAGES,
+    Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+  ],
+  partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"],
+});
+
 
 bot.on('ready', async () => {
-    // If there aren't any emoji reactions under the role messages, add them
-    await addReactionsToRoleMessages();
+  // If there aren't any emoji reactions under the role messages, add them
+  // await addReactionsToRoleMessages();
 });
 
 bot.on('messageCreate', async function (message) {

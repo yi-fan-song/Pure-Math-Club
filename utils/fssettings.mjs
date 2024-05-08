@@ -1,12 +1,16 @@
 import * as fs from 'fs';
 
-async function readFromSettings(settings) {
-    tempSettings = await fs.readFileSync("settings.json", 'utf-8', function(err, data) {
-        if(err) throw err;
-        const result = JSON.parse(data);
-        return result;
-    })
-    settings = JSON.parse(tempSettings);
+function readFromSettings() {
+  const tempSettings = fs.readFileSync(
+    "settings.json",
+    "utf-8",
+    function (err, data) {
+      if (err) throw err;
+      const result = JSON.parse(data);
+      return result;
+    }
+  );
+  return JSON.parse(tempSettings);
 }
 
 function writeToSettings(settings) {
